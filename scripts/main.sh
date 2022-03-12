@@ -49,10 +49,15 @@ get_engine() {
 	echo "$value"
 }
 
+clipboard=$(xclip -o -sel clipboard | awk '{print $1}')
+buffer=$(tmux save-buffer -)
+target=${1:-buffer}
+
 vars=$(echo "$(get_engine)" | sed "s/|/\n/g")
 while IFS= read -r line; do
-    result="${result}echo ---$line---; tmux save-buffer - | xargs -I{} python $CURRENT_DIR/engine/translator.py --engine=$line --from=$(get_from) --to=$(get_to) {}; echo ''; "
+    result="${result}echo ---$line---; echo ${!target}| xargs -I{} python $CURRENT_DIR/../engine/translator.py --engine=$line --from=$(get_from) --to=$(get_to) {}; echo ''; "
 done <<< "$vars"
+
 result="${result}read -r"
 
 tmux popup -w $(get_width) -h $(get_height) -E "$result"

@@ -1,5 +1,7 @@
 default_launch_key="t"
+default_launch_key_clipboard="m"
 launch_key="@tmux-translator"
+launch_key_clipboad="@tmux-translator-clipboard"
 
 default_width="38%"
 width="@tmux-translator-width"
