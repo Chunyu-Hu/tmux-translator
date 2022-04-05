@@ -55,7 +55,7 @@ target=${1:-buffer}
 
 vars=$(echo "$(get_engine)" | sed "s/|/\n/g")
 while IFS= read -r line; do
-    result="${result}echo ---$line---; echo ${!target}| xargs -I{} python $CURRENT_DIR/../engine/translator.py --engine=$line --from=$(get_from) --to=$(get_to) {}; echo ''; "
+    result="${result}echo ---$line---; echo ${!target}| xargs -I{} python $CURRENT_DIR/../engine/translator.py --phonetic --engine=$line --from=$(get_from) --to=$(get_to) {}; echo ''; "
 done <<< "$vars"
 
 result="${result}read -r"
