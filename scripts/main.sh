@@ -52,10 +52,17 @@ get_engine() {
 clipboard=$(xclip -o -sel clipboard | awk '{print $1}')
 buffer=$(tmux save-buffer -)
 target=${1:-buffer}
+reserve=${2:-""}
 
 vars=$(echo "$(get_engine)" | sed "s/|/\n/g")
+if [ -n "$reserve" ]; then
+	var=$from
+	from=$to
+	to=$var
+fi
+
 while IFS= read -r line; do
-    result="${result}echo ---$line---; echo ${!target}| xargs -I{} python $CURRENT_DIR/../engine/translator.py --phonetic --engine=$line --from=$(get_from) --to=$(get_to) {}; echo ''; "
+    result="${result}echo ---$line---; echo ${!target} | xargs -I{} python $CURRENT_DIR/../engine/translator.py --phonetic --engine=$line --from=$(get_from) --to=$(get_to) {}; echo ''; "
 done <<< "$vars"
 
 result="${result}read -r"

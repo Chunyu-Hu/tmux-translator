@@ -1,7 +1,12 @@
 default_launch_key="t"
 default_launch_key_clipboard="m"
+default_key_buffer_zhtoen="r"
+default_key_clipboard_zhtoen="n"
+
 launch_key="@tmux-translator"
 launch_key_clipboad="@tmux-translator-clipboard"
+launch_key_buffer_zhtoen="@tmux-translator-zhtoen"
+launch_key_clipboad_zhtoen="@tmux-translator-clipboard-zhtoen"
 
 default_width="38%"
 width="@tmux-translator-width"
