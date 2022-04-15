@@ -18,6 +18,12 @@ set_launch_bindings() {
 		tmux bind-key -T copy-mode-vi "$key" send-keys -X copy-pipe-and-cancel "$CURRENT_DIR/scripts/main.sh clipboard"
 	done
 
+	key_bindings=$(get_tmux_option "$launch_key_primary" "$default_launch_key_primary")
+	for key in $key_bindings; do
+		tmux bind-key -T copy-mode "$key" send-keys -X copy-pipe-and-cancel "$CURRENT_DIR/scripts/main.sh primary"
+		tmux bind-key -T copy-mode-vi "$key" send-keys -X copy-pipe-and-cancel "$CURRENT_DIR/scripts/main.sh primary"
+	done
+
 	key_bindings=$(get_tmux_option "$launch_key_buffer_zhtoen" "$default_key_buffer_zhtoen")
 	for key in $key_bindings; do
 		tmux bind-key -T copy-mode "$key" send-keys -X copy-pipe-and-cancel "$CURRENT_DIR/scripts/main.sh buffer 1"

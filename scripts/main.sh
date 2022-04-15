@@ -49,6 +49,7 @@ get_engine() {
 	echo "$value"
 }
 
+primary=$(xclip -o -sel p | awk '{print $1}')
 clipboard=$(xclip -o -sel clipboard | awk '{print $1}')
 buffer=$(tmux save-buffer -)
 target=${1:-buffer}
